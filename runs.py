@@ -173,7 +173,7 @@ def BayesianGaussianDiscriminantRuns(base):
             for i in range(21):
                 print('\nIteração {}\n'.format(i))
                 xtrain, ytrain, xtest, ytest = datasetSplitTrainTest(x, y, 80)
-                model = GaussianDiscriminantAnalysis(model_type=mode)
+                model = GaussianDiscriminantAnalysis(mode)
                 model.fit(xtrain, ytrain,convertDocName[base],True,i)
                 ypredict = model.predict(xtest,convertDocName[base],i,False)
                 confMatrix = confusionMatrix(ytest, ypredict)
