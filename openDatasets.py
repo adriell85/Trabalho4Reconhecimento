@@ -125,7 +125,7 @@ def split_data_randomly(data, percentage):
 
     return first_group, second_group
 
-def datasetSplitTrainTest(x,y,percentageTrain,labelClassifier,labelDataset):
+def datasetSplitTrainTest(x,y,percentageTrain):
 
     dataToSplit = [[x,y] for x,y in zip(x,y)]
 

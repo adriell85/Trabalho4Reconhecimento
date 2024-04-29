@@ -25,7 +25,7 @@ def plotGaussianDistribution(means, covariances, classes, featureIndices=(0, 1),
 
 
 
-def plotGaussianDistribution3d(baseName,iteration,means, covariances, classes, featureIndices=(0, 1), gridRange=(-0.3, 0.3), resolution=0.1):
+def plotGaussianDistribution3d(modeName,baseName,iteration,means, covariances, classes, featureIndices=(0, 1), gridRange=(-0.3, 0.3), resolution=0.1):
     atributesCombinationArtificial = [
         [0, 1]
     ]
@@ -72,11 +72,11 @@ def plotGaussianDistribution3d(baseName,iteration,means, covariances, classes, f
             ax.set_xlabel(f'Feature {f1}')
             ax.set_ylabel(f'Feature {f2}')
             ax.set_zlabel('Probability')
-            plt.savefig('Resultados_Naive/{}/Gaussiana_Base_{}_features_{}_classe_{}_iteracao_{}.png'.format(baseName,baseName,ind,i,iteration))
+            plt.savefig('Resultados_Bayes_{}/{}/Gaussiana_{}_Base_{}_features_{}_classe_{}_iteracao_{}.png'.format(modeName,baseName,modeName,baseName,ind,i,iteration))
 
         # plt.show()
 
-def dispersionDataByClass(data, datasetName,iteration,classIndex):
+def dispersionDataByClass(data, datasetName,iteration,classIndex,modeName):
     atributesCombinationArtificial = [
         [0, 1]
     ]
@@ -136,10 +136,10 @@ def dispersionDataByClass(data, datasetName,iteration,classIndex):
 
     plt.tight_layout()
 
-    plt.savefig('Resultados_Naive/{}/Grafico_dispersao_Dados_Treino_Base_{}_iteracao_{}_classe_{}'.format(datasetName,datasetName, iteration,classIndex))
+    plt.savefig('Resultados_Bayes_{}/{}/Grafico_dispersao_Dados_Treino_Base_{}_iteracao_{}_classe_{}'.format(modeName,modeName,datasetName,datasetName, iteration,classIndex))
 
 
-def dispersionDataBlindClass(data, datasetName,iteration,isTrainingData):
+def dispersionDataBlindClass(data, datasetName,iteration,isTrainingData,modeName):
     atributesCombinationArtificial = [
         [0, 1]
     ]
@@ -191,8 +191,8 @@ def dispersionDataBlindClass(data, datasetName,iteration,isTrainingData):
 
     plt.tight_layout()
     if(isTrainingData):
-        plt.savefig('Resultados_Naive/{}/Grafico_dispersao_Dados_Treino_Base_{}_iteracao_{}'.format(datasetName,datasetName, iteration))
+        plt.savefig('Resultados_{}/{}/Grafico_dispersao_Dados_Treino_Base_{}_{}_iteracao_{}'.format(modeName,datasetName,datasetName,modeName,iteration))
     else:
         plt.savefig(
-            'Resultados_Naive/{}/Grafico_dispersao_Dados_Teste_Base_{}_iteracao_{}'.format(datasetName, datasetName,iteration))
+            'Resultados_{}/{}/Grafico_dispersao_Dados_Teste_Base_{}_{}_iteracao_{}'.format(modeName,datasetName, datasetName,modeName,iteration))
     # plt.show()

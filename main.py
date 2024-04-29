@@ -1,10 +1,10 @@
 import matplotlib
 matplotlib.use('TkAgg')
-from runs import KNNRuns,DMCRuns,NayveBayesRuns
+from runs import KNNRuns,DMCRuns,BayesianGaussianDiscriminantRuns
 
 
 def main():
     for i in range(5):
-        NayveBayesRuns(i)
+        BayesianGaussianDiscriminantRuns(i)
 if __name__ == "__main__":
     main()

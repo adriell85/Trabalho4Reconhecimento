@@ -30,7 +30,7 @@ class NaiveBayesClassifier:
 
         if(isruningTrain):
             dispersionDataBlindClass(xtrain, baseName,iteration, True)
-            plotGaussianDistribution3d(baseName, iteration,self.mean, self.covariance, self.classes, featureIndices=(1, 2))
+            plotGaussianDistribution3d(baseName, iteration,self.means, self.covariance, self.classes, featureIndices=(1, 2))
             fileName = "DadosGaussiana/Dados_Plotagem_Gaussiana{}_base_{}_iteracao_{}.txt".format(baseName,baseName,iteration)
             with open(fileName, 'w') as arquivo:
                 arquivo.write("Dados de Treino.\n\n{}\n".format(xtrain))
