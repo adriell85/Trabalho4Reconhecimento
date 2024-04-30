@@ -157,8 +157,8 @@ def BayesianGaussianDiscriminantRuns(base):
 
     }
     classifierMode = [
-        'qda',
-        'lda'
+        'lda',
+        'qda'
     ]
 
     for mode in classifierMode:
@@ -175,7 +175,7 @@ def BayesianGaussianDiscriminantRuns(base):
                 xtrain, ytrain, xtest, ytest = datasetSplitTrainTest(x, y, 80)
                 model = GaussianDiscriminantAnalysis(mode)
                 model.fit(xtrain, ytrain,convertDocName[base],True,i)
-                ypredict = model.predict(xtest,convertDocName[base],i,False)
+                ypredict = model.predict(xtest,ytest,convertDocName[base],i,False)
                 confMatrix = confusionMatrix(ytest, ypredict)
                 print('Confusion Matrix:\n', confMatrix)
                 plotConfusionMatrix(confMatrix,originalLabels,'Bayesian_{}'.format(mode),i,convertDocName[base],)

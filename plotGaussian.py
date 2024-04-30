@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import multivariate_normal
 import matplotlib.pyplot as plt
+import seaborn as sns
 import matplotlib
 matplotlib.use('TkAgg')
 
@@ -195,4 +196,60 @@ def dispersionDataBlindClass(data, datasetName,iteration,isTrainingData,modeName
     else:
         plt.savefig(
             'Resultados_{}/{}/Grafico_dispersao_Dados_Teste_Base_{}_{}_iteracao_{}'.format(modeName,datasetName, datasetName,modeName,iteration))
+    # plt.show()
+
+def plotDadosColridos(xtrain, ytrain, datasetName, iteration, isTrainingData, modeName):
+    # Attribute combinations for different datasets
+    atributesCombination = {
+        'Artificial': [[0, 1]],
+        'Iris': [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]],
+        'Free': [[0, 1], [0, 4], [0, 5], [2, 3], [3, 4], [4, 5]]
+    }
+
+    # Get attribute combinations based on dataset
+    attribute_combinations = atributesCombination.get(datasetName, atributesCombination['Free'])
+
+    # Number of plots
+    num_plots = len(attribute_combinations)
+    cols = 3
+    rows = (num_plots + cols - 1) // cols
+
+    fig, axs = plt.subplots(rows, cols, figsize=(5 * cols, 4 * rows))
+    axs = axs.ravel()  # Flatten the axes array for easier indexing
+
+    # Generate scatter plots for each attribute combination
+    for i, (idx1, idx2) in enumerate(attribute_combinations):
+        for class_value in set(ytrain):  # Iterate through each class
+            # Select data for the current class
+            class_indices = [index for index, value in enumerate(ytrain) if value == class_value]
+            x = [xtrain[index][idx1] for index in class_indices]
+            y = [xtrain[index][idx2] for index in class_indices]
+
+            axs[i].scatter(x, y, label=f'Class {class_value}')
+
+        axs[i].set_xlabel(f'Attribute {idx1}')
+        axs[i].set_ylabel(f'Attribute {idx2}')
+        axs[i].set_title(f'Attribute {idx1} vs Attribute {idx2}')
+        axs[i].legend()
+
+    # Hide unused subplots
+    for j in range(i + 1, rows * cols):
+        fig.delaxes(axs[j])
+
+    fig.suptitle(f'Dataset {datasetName}, Iteration {iteration}')
+    plt.tight_layout()
+    plot_path = f'Resultados_{modeName}/{datasetName}/Grafico_dispersao_colorido_Data_{"Treino" if isTrainingData else "Teste"}_Dataset_{datasetName}_{modeName}_Iteracao{iteration}.png'
+    plt.savefig(plot_path)
+    # plt.show()
+
+def plotCovarianceMatrix(cov_matrix, baseName,iteration, modeName):
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cov_matrix, annot=True, fmt=".2f", cmap='coolwarm', cbar=True)
+    plt.title('Covariance Matrix')
+    plt.xlabel("Features")
+    plt.ylabel("Features")
+    plt.savefig(
+        'Resultados_{}/{}/Matriz_de_Covariancia_Base_{}_{}_iteracao_{}'.format(modeName, baseName,
+                                                                                       baseName, modeName,
+                                                                                       iteration))
     # plt.show()
