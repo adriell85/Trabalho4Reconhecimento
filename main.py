@@ -4,7 +4,8 @@ from runs import KNNRuns,DMCRuns,BayesianGaussianDiscriminantRuns
 
 
 def main():
-    for i in range(5):
-        BayesianGaussianDiscriminantRuns(i)
+    BayesianGaussianDiscriminantRuns(2)
+    # for i in range(5):
+    #     BayesianGaussianDiscriminantRuns(i)
 if __name__ == "__main__":
     main()
